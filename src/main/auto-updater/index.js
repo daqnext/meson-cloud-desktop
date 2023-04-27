@@ -54,10 +54,7 @@ function setup (ctx) {
         title: 'Desktop Update',
         message: `An update to Desktop ${ version } is available. Would you like to install it now?`,
         type: 'info',
-        buttons: [
-          'later',
-          'now'
-        ]
+        buttons: ['Later', 'Now']
       })
 
       if (choosen === 1) { // now

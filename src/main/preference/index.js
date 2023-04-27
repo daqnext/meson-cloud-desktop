@@ -1,8 +1,9 @@
-const { app, ipcMain, BrowserWindow } = require('electron')
+const { app, ipcMain, BrowserWindow, dialog } = require('electron')
 const isDev = require('electron-is-dev')
 const path = require('path')
 const { DEFAULT_APP_PATH } = require('../common/consts')
 const logger = require('../common/logger')
+const { showDialog } = require('../dialogs')
 
 let prefWindow
 
@@ -43,6 +44,7 @@ const tokenPref = (ctx) => {
   }
 
   const restart = () => {
+    logger.debug('restarting');
     app.relaunch();
     app.exit();
   };
@@ -51,7 +53,16 @@ const tokenPref = (ctx) => {
     logger.debug('TOKEN_SETTING receive');
     await ctx.setNodeToken(data.token);
 
-    restart();
+    const choosen = showDialog({
+      title: 'Desktop Restart',
+      message: 'Token changed! Restart to take effect',
+      type: 'question',
+      buttons: ['Restart', 'Later']
+    })
+
+    if (choosen === 0) {
+      restart();
+    }
   });
 
   ipcMain.on('TOKEN_LOADING', async (event) => {
