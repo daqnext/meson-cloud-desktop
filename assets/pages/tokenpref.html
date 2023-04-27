@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Token</title>
+  <style>
+@media screen {
+  * , *:after,*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /*
+    font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
+  */
+} /*base sizee*/
+body {
+  height: 100%;
+  font-size: 1.4rem;
+} /* =14px all type sizes are relative to the base size*/
+
+.container{
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  min-width: 0;
+}
+
+.item-row{
+  box-sizing: border-box;
+  margin: 10px auto;
+  padding: 0;
+  color: rgba(0,0,0,.88);
+  font-size: 14px;
+  line-height: 1.5714285714285714;
+  list-style: none;
+  align-items: center;
+}
+
+.row-label {
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  height: 32px;
+  font-size: 14px;
+  margin: auto 6px;
+}
+
+.token-input {
+  position: relative;
+  display: inline-block;
+
+  box-sizing: border-box;
+
+  font-size: 14px;
+  line-height: 1.5714285714285714;
+  list-style: none;
+  width: 250px;
+  max-width: 300px;
+  min-width: 0;
+  background-color: #fff;
+  background-image: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d9d9d9;
+  border-radius: 6px;
+  transition: all .2s;
+
+  margin: auto 6px;
+  padding: 4px 11px;
+}
+
+.primary-btn {
+  font-size: 14px;
+  height: 32px;
+  border-radius: 6px;
+
+  outline: none;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all .2s cubic-bezier(.645,.045,.355,1);
+  user-select: none;
+  touch-action: manipulation;
+  line-height: 1.5714285714285714;
+
+  color: #fff;
+  background-color: #1677ff;
+  box-shadow: 0 2px 0 rgba(5,145,255,.1);
+
+  margin: auto 6px;
+  padding: 4px 15px;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="content" class="row item-row">
+      <div class="row-label">Token:</div>
+      <input id="tokenin" class="token-input" type="text" name="background" value="TOKEN_INPUT">
+      <button id="tokenBtn" class="primary-btn">OK</button>
+    </div>
+    <div class="row item-row">
+      <svg viewBox="64 64 896 896" focusable="false" data-icon="question-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0130.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1080 0 40 40 0 10-80 0z"></path></svg>
+      <span>
+        app restart when token changed
+      </span>
+    </div>
+  </div>
+  <script src="./tokenpref.js"></script>
+</body>
+</html>
