@@ -1,0 +1,88 @@
+appId: meson.cloud.desktop
+productName: Meson Cloud Desktop
+copyright: MESON PTE. LTD.
+
+extends: null
+
+files:
+  - filter:
+    - build/**/*
+    - src/main/**/*
+    - assets/**/*
+    - node_modules/**/*
+
+extraResources:
+  - to: static
+    filter:
+      - bin/ipfs*
+      - bin/meson-cloud-client*
+      - bin/*.yml
+
+directories:
+  buildResources: assets/build
+  output: release
+
+asar: false
+
+afterSign: 'pkgs/mac/notarize.js'
+
+mac:
+  artifactName: ${name}-${version}-mac-${arch}.${ext}
+  icon: assets/build/icon.png
+  category: public.app-category.productivity
+  darkModeSupport: true
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: 'pkgs/mac/entitlements.mac.plist'
+  entitlementsInherit: 'pkgs/mac/entitlements.mac.plist'
+  target:
+    - zip
+    - dmg
+
+dmg:
+  iconSize: 160
+  iconTextSize: 12
+  window:
+    width: 660
+    height: 400
+  contents:
+    - x: 180
+      y: 170
+      type: file
+    - x: 480
+      y: 170
+      type: link
+      path: /Applications
+  sign: false
+
+win:
+  artifactName: ${name}-${version}-win-${arch}.${ext}
+  icon: assets/build/icon.png
+  target:
+    - target: nsis
+
+nsis:
+  oneClick: false
+  warningsAsErrors: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
+linux:
+  artifactName: ${name}-${version}-linux-${arch}.${ext}
+  icon: assets/build/icon.png
+  #executableName: meson-cloud-client-linux-desktop
+  #synopsis: A desktop for Electron App Template
+  executableArgs:
+    - --no-sandbox
+  maintainer: admin@coreservice.io
+  target:
+    - deb
+    - AppImage
+
+publish:
+  # - github
+  provider: "generic"
+  url: "https://mcdl.blockfans.org"

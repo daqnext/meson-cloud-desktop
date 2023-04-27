@@ -1,0 +1,72 @@
+{
+  "name": "meson.cloud.desktop",
+  "description": "Meson Cloud Desktop",
+  "version": "0.0.2",
+  "private": true,
+  "main": "./src/main/main.js",
+  "homepage": ".",
+  "scripts": {
+    "start": "concurrently \"BROWSER=none npm run start:ui\" \"wait-on http://localhost:3000 && npm run NODE_ENV=dev start:electron\"",
+    "start:ui": "react-scripts start",
+    "start:electron": "NODE_ENV=dev electron .",
+    "build": "npm run build:ui && npm run build:electron",
+    "build:ui": "react-scripts build",
+    "electron:build:mac:x64": "electron-builder -m --x64 -p always",
+    "electron:build:mac:arm64": "electron-builder -m --arm64 -p always",
+    "electron:build:win:x64": "electron-builder -w --x64 -p always",
+    "electron:build:win:arm64": "electron-builder -w --arm64 -p always",
+    "electron:build:linux:x64": "electron-builder -l --x64 -p always",
+    "electron:build:linux:arm64": "electron-builder -l --arm64 -p always",
+    "test": "react-scripts test",
+    "build:tailwind": "tailwind build src/render/styles/index.css -o src/render/styles/tailwind.css",
+    "clean": "shx rm -rf build && shx rm -rf release"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "bytes": "^3.1.2",
+    "electron-is-dev": "^2.0.0",
+    "electron-store": "^8.0.1",
+    "electron-updater": "^5.3.0",
+    "execa": "^6.1.0",
+    "files-from-path": "^0.2.5",
+    "format-number": "^3.0.0",
+    "fs-extra": "^10.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "web-vitals": "^2.1.4",
+    "winston": "^3.7.2"
+  },
+  "devDependencies": {
+    "@electron/notarize": "^1.2.1",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "concurrently": "^7.0.0",
+    "dotenv": "^16.0.0",
+    "electron": "^22.3.1",
+    "electron-builder": "^23.6.0",
+    "react-scripts": "5.0.0",
+    "shx": "^0.3.4",
+    "standard": "^16.0.4",
+    "tailwindcss": "^3.2.4",
+    "wait-on": "^6.0.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

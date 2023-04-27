@@ -1,6 +1,8 @@
 node_modules
 build
 dist
+release
+.env
 
 .DS_Store
 */**/.DS_Store
