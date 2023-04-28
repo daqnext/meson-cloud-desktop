@@ -1,4 +1,4 @@
-const { app, ipcMain, BrowserWindow, dialog } = require('electron')
+const { app, ipcMain, BrowserWindow } = require('electron')
 const isDev = require('electron-is-dev')
 const path = require('path')
 const { DEFAULT_APP_PATH } = require('../common/consts')

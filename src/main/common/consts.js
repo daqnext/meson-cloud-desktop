@@ -9,6 +9,11 @@ const getUserPath = () => {
   return userPath;
 }
 
+const getGUIDataPath = () => {
+  const dataPath = app.getPath('userData');
+  return dataPath;
+}
+
 const getAppPath = () => {
   const appPath = app.getAppPath();
   return appPath;
@@ -34,6 +39,7 @@ module.exports = Object.freeze({
   VERSION: packageJson.version,
   ELECTRON_VERSION: process.versions.electron,
   DEFAULT_APP_PATH: getAppPath(),
+  DEFAULT_USER_PATH: getUserPath(),
   DEFAULT_RES_PATH: getExtraResPath(),
   DEFAULT_BIN_PATH: getExtraBinPath(),
   EXE_NAME: 'meson-cloud-client',

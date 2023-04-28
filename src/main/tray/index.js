@@ -123,7 +123,7 @@ function setupTray(ctx) {
     menu = buildMenu(ctx);
 
     tray.setContextMenu(menu);
-    tray.setToolTip('Gaga Desktop');
+    tray.setToolTip('Meson Cloud Desktop');
 
     menu.on('menu-will-show', () => {
       // ipcMain.emit(ipcMainEvents.MENUBAR_OPEN) 

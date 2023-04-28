@@ -1,25 +1,14 @@
 const { app } = require('electron')
-const path = require('path')
 const logger = require('../common/logger')
-const { IS_WIN, DEFAULT_BIN_PATH, EXE_NAME } = require('../common/consts')
 const { newNodeCtl } = require('../ctl')
 
-
-function getBinPath() {
-  const binPath = DEFAULT_BIN_PATH;
-
-  const ExeName = EXE_NAME;
-
-  const exeName = IS_WIN ? ( ExeName + '.exe' ) : ( ExeName );
-
-  return path.join(binPath, exeName)
-}
-
-function newNoded() {
-  const bin = getBinPath();
+function newNoded(ctx) {
+  
+  const exeRepo = ctx.exeRepo;
 
   const noded = newNodeCtl({
-    bin: bin,
+    bin: exeRepo.exePath,
+    cwd: exeRepo.repoPath,
   });
 
   return noded;
@@ -44,7 +33,7 @@ async function startWithLogs(ctx, noded) {
 }
 
 async function startDaemon(ctx, opts) {
-  const noded = newNoded();
+  const noded = newNoded(ctx);
   if (noded === null) {
     app.quit();
     return { noded: undefined, err: new Error('get node failed'), id: undefined, logs: '' };

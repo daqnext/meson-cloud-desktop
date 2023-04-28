@@ -1,8 +1,14 @@
-const logger = require('../common/logger');
-const { startDaemon } = require('./daemon');
+const logger = require('../common/logger')
+const { startDaemon } = require('./daemon')
+const setupRepoConfig = require('./repo-config')
 
 const setupDaemon = async (ctx) => {
   let noded = null;
+
+  const exeRepo = setupRepoConfig();
+  exeRepo.initConfigFolder();
+
+  ctx.exeRepo = exeRepo;
 
   const store = ctx.store;
 

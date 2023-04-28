@@ -16,7 +16,7 @@ extraResources:
     filter:
       - bin/ipfs*
       - bin/meson-cloud-client*
-      - bin/*.yml
+      - bin/*.yml.template
 
 directories:
   buildResources: assets/build

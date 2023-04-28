@@ -8,6 +8,7 @@ const translateError = (err) => {
 
 const setupProcess = (params, options) => {
   const exec = params.bin;
+  const cwd = params.cwd;
 
   const { name } = options;
   const tags = name ? `[${name}]` : "";
@@ -25,6 +26,7 @@ const setupProcess = (params, options) => {
 
       const { stdout, stderr } = execaSync(exec, args, {
         // env: this.env
+        cwd: cwd
       })
 
       if (stderr)
@@ -59,6 +61,7 @@ const setupProcess = (params, options) => {
 
       const subprocess = execa(exec, args, {
         // env: this.env
+        cwd: cwd
       })
 
       const { stdout, stderr } = subprocess;
