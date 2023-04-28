@@ -52,6 +52,7 @@ const tokenPref = (ctx) => {
   ipcMain.on('TOKEN_SETTING', async (event, data) => {
     logger.debug('TOKEN_SETTING receive');
     await ctx.setNodeToken(data.token);
+    prefWindow.hide();
 
     const choosen = showDialog({
       title: 'Desktop Restart',
