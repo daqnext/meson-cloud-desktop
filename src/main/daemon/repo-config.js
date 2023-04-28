@@ -3,22 +3,7 @@ const fs = require("fs")
 const logger = require('../common/logger')
 const { IS_WIN, EXE_NAME, DEFAULT_USER_PATH, DEFAULT_BIN_PATH } = require('../common/consts')
 
-const mkdirPathSync = (to) => {
-  const dir = path.dirname(to);
-  if (to === dir)
-    return false;
-  
-  if (fs.existsSync(to)) 
-    return true;
-
-  if (mkdirPathSync(dir)) {
-    fs.mkdirSync(to)
-    return true;
-  }
-  return false;
-}
-
-const getBinPath = () => {
+const getExecPath = () => {
   const binPath = DEFAULT_BIN_PATH;
 
   const ExeName = EXE_NAME;
@@ -36,17 +21,12 @@ const setupRepoConfig = () => {
   }
 
   const init = () => {
-
-    repo.exePath = getBinPath();
-
-    let repoPath = path.join(DEFAULT_USER_PATH, "/.config/mesoncloud");
-    repo.repoPath = path.normalize(repoPath);
-
+    repo.exePath = getExecPath();
+    repo.repoPath = DEFAULT_USER_PATH;
     return repo;
   }
 
   const initConfigFolder = () => {
-    mkdirPathSync(repo.repoPath);
     const toCfgFile = path.join(repo.repoPath, "config.yml");
     const cfgTemplate = path.join(DEFAULT_BIN_PATH, "config.yml.template");
 
@@ -59,9 +39,6 @@ const setupRepoConfig = () => {
         fs.copyFileSync(cfgTemplate, toCfgFile);
       }
     }
-
-    const logsDir = path.join(repo.repoPath, "logs");
-    fs.existsSync(logsDir) || fs.mkdirSync(logsDir);
   }
 
   const autoFixConfig = () => {
