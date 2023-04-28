@@ -3,9 +3,28 @@ const os = require('os')
 const isDev = require('electron-is-dev')
 const packageJson = require('../../../package.json')
 const path = require('path')
+const fs = require('fs')
+
+const mkdirPathSync = (to) => {
+  const dir = path.dirname(to);
+  if (to === dir)
+    return false;
+
+  if (fs.existsSync(to))
+    return true;
+
+  if (mkdirPathSync(dir)) {
+    fs.mkdirSync(to)
+    return true;
+  }
+  return false;
+}
+
+const homePath = app.getPath('home');
+const userPath = path.normalize(path.join(homePath, "/.config/mesoncloud"));
+mkdirPathSync(userPath);
 
 const getUserPath = () => {
-  const userPath = app.getPath('home');
   return userPath;
 }
 

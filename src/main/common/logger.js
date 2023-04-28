@@ -1,10 +1,15 @@
 const { createLogger, format, transports } = require('winston')
 const { join } = require('path')
 const { app } = require('electron')
+const fs = require('fs')
+const { DEFAULT_USER_PATH } = require('./consts')
 
 const { combine, splat, timestamp, printf } = format
-const logsDir = app.getPath('userData')
+// const logsDir = app.getPath('userData')
+const logsDir = join(DEFAULT_USER_PATH, 'logs')
 const logsFilePath = join(logsDir, 'combined.log')
+
+fs.existsSync(logsDir) || fs.mkdirSync(logsDir)
 
 const errorFile = new transports.File({
   level: 'error',
@@ -29,13 +34,12 @@ const logger = createLogger({
     errorFile,
     new transports.File({
       level: 'debug',
-      filename: join(logsDir, 'combined.log')
+      filename: logsFilePath
     })
   ]
 })
 
 logger.info(`[meta] logs can be found on ${logsDir}`)
-
 
 module.exports = Object.freeze({
   start: (msg, opts = {}) => {
