@@ -1,7 +1,7 @@
 {
   "name": "meson.cloud.desktop",
   "description": "Meson Cloud Desktop",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "private": true,
   "main": "./src/main/main.js",
   "homepage": ".",
