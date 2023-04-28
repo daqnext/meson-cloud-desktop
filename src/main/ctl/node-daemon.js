@@ -1,12 +1,12 @@
 const logger = require('../common/logger')
-const setupProc = require('./process')
+const setupProcess = require('./process')
 
-const setupNodeCtl = (opt) => {
+const setupNodeCtl = (params) => {
 
   let ctx = {}
   ctx.started = false;
 
-  const task = setupProc(opt, { name: 'ctl' });
+  const task = setupProcess(params, { name: 'ctl' });
 
   ctx.start = async () => {
     if (!ctx.started) {
